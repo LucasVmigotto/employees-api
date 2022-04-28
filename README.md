@@ -76,7 +76,13 @@ The project was built in a [Docker](https://docs.docker.com/engine) environment 
     yarn
     ```
 
-4. Exit from CLI
+4. Migrate to last database version
+
+    ```bash
+    yarn migrate:latest
+    ```
+
+5. Exit from CLI
 
 ## Start Container Services
 
