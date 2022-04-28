@@ -19,10 +19,6 @@ exports.reportByAge = async ({ knex, logger }, res) => {
     const [average] = await knex('employees')
       .avg(knex.raw('EXTRACT(YEARS FROM AGE(??))', 'birth_date'))
 
-    console.log(younger)
-    console.log(older)
-    console.log(average)
-
     return makeResponse(
       res,
       200,
@@ -49,10 +45,27 @@ exports.reportByAge = async ({ knex, logger }, res) => {
 exports.reportBySalary = async ({ knex, logger }, res) => {
   try {
 
+    const [lowest] = await knex('employees')
+      .select(EMPLOYEE_FIELDS)
+      .orderBy('salary')
+      .limit(1)
+
+    const [highest] = await knex('employees')
+      .select(EMPLOYEE_FIELDS)
+      .orderBy('salary', 'desc')
+      .limit(1)
+
+    const [average] = await knex('employees')
+      .avg('salary')
+
     return makeResponse(
       res,
       200,
-      { }
+      {
+        lowest,
+        highest,
+        average
+      }
     )
 
   } catch (err) {
