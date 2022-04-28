@@ -15,12 +15,10 @@ module.exports = config => {
   app.use(bodyParser.json())
 
   app.use((req, _, next) => {
-
     req.knex = knex
     req.logger = logger
 
     next()
-
   })
 
   router(app)

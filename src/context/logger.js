@@ -7,7 +7,6 @@ const {
 } = winston.format
 
 exports.createLogger = context => {
-
   const { config } = context
 
   const format = config.NODE_ENV === 'production'
@@ -22,5 +21,4 @@ exports.createLogger = context => {
     ],
     silent: config.NODE_ENV === 'test'
   })
-
 }

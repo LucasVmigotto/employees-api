@@ -1,4 +1,3 @@
 exports.reportByAge = () => {}
 
 exports.reportBySalary = () => {}
-

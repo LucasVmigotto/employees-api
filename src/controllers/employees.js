@@ -5,7 +5,6 @@ const {
 
 exports.listEmployees = async ({ knex, logger }, res) => {
   try {
-
     const employees = await knex('employees')
       .select(EMPLOYEE_FIELDS)
 
@@ -14,9 +13,7 @@ exports.listEmployees = async ({ knex, logger }, res) => {
       200,
       { employees }
     )
-
   } catch (err) {
-
     /* istanbul ignore next */
     logger.error(`Problem in listEmployees: ${err}`)
 
@@ -31,7 +28,6 @@ exports.listEmployees = async ({ knex, logger }, res) => {
 
 exports.getEmployee = async ({ knex, logger, params }, res) => {
   try {
-
     const { employeeId: id } = params
 
     const [employee] = await knex('employees')
@@ -43,9 +39,7 @@ exports.getEmployee = async ({ knex, logger, params }, res) => {
       200,
       { employee }
     )
-
   } catch (err) {
-
     /* istanbul ignore next */
     logger.error(`Problem in getEmployee: ${err}`)
 
@@ -55,13 +49,11 @@ exports.getEmployee = async ({ knex, logger, params }, res) => {
       500,
       { error: 'An internal error occurred' }
     )
-
   }
 }
 
 exports.createEmployee = async ({ knex, logger, body }, res) => {
   try {
-
     const [employee] = await knex('employees')
       .insert(body)
       .returning('id')
@@ -71,9 +63,7 @@ exports.createEmployee = async ({ knex, logger, body }, res) => {
       200,
       { employeeId: employee.id }
     )
-
   } catch (err) {
-
     logger.error(`Problem in createEmployee: ${err}`)
 
     const error = err.code === '23505'
@@ -85,13 +75,11 @@ exports.createEmployee = async ({ knex, logger, body }, res) => {
       err.code === '23505' ? 409 : 500,
       error
     )
-
   }
 }
 
 exports.updateEmployee = async ({ knex, logger, params, body }, res) => {
   try {
-
     const { employeeId: id } = params
 
     const [employee] = await knex('employees')
@@ -104,9 +92,7 @@ exports.updateEmployee = async ({ knex, logger, params, body }, res) => {
       200,
       { employeeId: employee.id }
     )
-
   } catch (err) {
-
     /* istanbul ignore next */
     logger.error(`Problem in updateEmployee: ${err}`)
 
@@ -121,13 +107,11 @@ exports.updateEmployee = async ({ knex, logger, params, body }, res) => {
       err.code === '23505' ? 409 : 500,
       error
     )
-
   }
 }
 
 exports.deleteEmployee = async ({ knex, logger, params }, res) => {
   try {
-
     const { employeeId: id } = params
 
     const deleted = await knex('employees')
@@ -136,14 +120,12 @@ exports.deleteEmployee = async ({ knex, logger, params }, res) => {
 
     return makeResponse(
       res,
-      !!deleted ? 204 : 409,
-      !!deleted ?
-        null :
-        { error: 'Employee could be deleted' }
+      deleted ? 204 : 409,
+      deleted
+        ? null
+        : { error: 'Employee could be deleted' }
     )
-
   } catch (err) {
-
     logger.error(`Problem in deleteEmployee: ${err}`)
 
     return makeResponse(
@@ -151,6 +133,5 @@ exports.deleteEmployee = async ({ knex, logger, params }, res) => {
       500,
       { error: 'An internal error occurred' }
     )
-
   }
 }

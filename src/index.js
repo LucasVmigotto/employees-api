@@ -7,11 +7,8 @@ const {
 } = createApp(config)
 
 const close = async () => {
-
   if (close.closed) {
-
     return
-
   }
 
   close.closed = true
@@ -23,19 +20,14 @@ const close = async () => {
   logger.info('Server Closed')
 
   process.exit()
-
 }
 
 httpServer.on('error', err => {
-
   logger.error(err)
 
   if (err.code === 'EADDRINUSE') {
-
     close()
-
   }
-
 })
 
 httpServer.listen(
@@ -44,7 +36,6 @@ httpServer.listen(
     host: config.API_HOST
   },
   () => {
-
     logger.info(`Server ready at http://${config.API_HOST}:${config.API_PORT}`)
   }
 )

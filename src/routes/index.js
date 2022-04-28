@@ -5,7 +5,6 @@ const employees = require('../controllers/employees')
 const reports = require('../controllers/reports')
 
 module.exports = app => {
-
   app.post('/auth', authMe)
 
   app.post('/employees', protectedByAuth, employees.createEmployee)
@@ -16,5 +15,4 @@ module.exports = app => {
 
   app.get('/reports/employees/age', protectedByAuth, reports.reportByAge)
   app.get('/reports/employees/salary', protectedByAuth, reports.reportBySalary)
-
 }

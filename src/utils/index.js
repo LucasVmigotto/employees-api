@@ -15,7 +15,7 @@ const contraints = require('./constraints')
  */
 const makeResponse = (response, code = 201, payload = {}) => response
   .status(code)
-  .send({ ...payload})
+  .send({ ...payload })
 
 /**
  *
@@ -32,13 +32,13 @@ const makeResponse = (response, code = 201, payload = {}) => response
  * with the given data as payload
  */
 const signJWT = (data, jwtIssuer, jwtSecret, jwtExpires) => sign(
-    data,
-    jwtSecret,
-    {
-      issuer: jwtIssuer,
-      expiresIn: jwtExpires
-    }
-  )
+  data,
+  jwtSecret,
+  {
+    issuer: jwtIssuer,
+    expiresIn: jwtExpires
+  }
+)
 
 module.exports = {
   ...contraints,

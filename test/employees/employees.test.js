@@ -10,7 +10,6 @@ const createApp = require('../../src/app')
 /* eslint-env mocha */
 /* eslint-disable no-unused-expressions */
 describe('Employees', function () {
-
   const token = generateToken()
 
   let localEmployeeId = null
@@ -18,7 +17,6 @@ describe('Employees', function () {
   let knex, httpServer
 
   before(function () {
-
     const {
       knex: localKnex,
       httpServer: localHttpServer
@@ -26,19 +24,14 @@ describe('Employees', function () {
 
     knex = localKnex
     httpServer = localHttpServer
-
   })
 
   after(async function () {
-
     await knex.destroy()
-
   })
 
   describe('GET /employees', function () {
-
     it('Should throw error becouse token was not sent', async function () {
-
       const {
         statusCode,
         body: { error }
@@ -48,11 +41,9 @@ describe('Employees', function () {
       expect(statusCode).to.be.equal(409)
       expect(error).to.be.not.null
       expect(error).to.match(/No token was submitted/)
-
     })
 
     it('Should successfully a employees list', async function () {
-
       const {
         statusCode,
         body: { employees }
@@ -64,13 +55,10 @@ describe('Employees', function () {
       expect(statusCode).to.be.equal(200)
       expect(employees).to.be.not.null
       expect(employees).to.be.an('array')
-
     })
-
   })
 
   describe('POST /employees', function () {
-
     const employToCreate = {
       name: 'John Doe',
       email: 'john.doe@email.com',
@@ -80,7 +68,6 @@ describe('Employees', function () {
     }
 
     it('Should successfully create an employee', async function () {
-
       const {
         statusCode,
         body: { employeeId }
@@ -95,11 +82,9 @@ describe('Employees', function () {
       expect(employeeId).to.be.an('number')
 
       localEmployeeId = employeeId
-
     })
 
     it('Should throw email already in use error', async function () {
-
       const {
         statusCode,
         body: { error }
@@ -111,15 +96,11 @@ describe('Employees', function () {
       expect(statusCode).to.be.equal(409)
       expect(error).to.be.not.null
       expect(error).to.match(/There is already a employee with this email/)
-
     })
-
   })
 
   describe('GET /employees/<employeeId>', function () {
-
     it('Should return an employee by id', async function () {
-
       const {
         statusCode,
         body: { employee }
@@ -136,15 +117,11 @@ describe('Employees', function () {
       expect(employee).to.have.property('department')
       expect(employee).to.have.property('salary')
       expect(employee).to.have.property('birth_date')
-
     })
-
   })
 
   describe('PUT /employees/<employeeId>', function () {
-
     it('Should successfully update an employee', async function () {
-
       const {
         statusCode,
         body: { employeeId }
@@ -162,26 +139,20 @@ describe('Employees', function () {
       expect(statusCode).to.be.equal(200)
       expect(employeeId).to.be.not.null
       expect(employeeId).to.be.an('number')
-
     })
-
   })
 
   describe('DELETE /employees/<employeeId>', function () {
-
     it('Should successfully delete a employee', async function () {
-
       const { statusCode } = await request(httpServer)
         .delete(`/employees/${localEmployeeId}`)
         .set({ Authorization: `Bearer ${token}` })
         .then(handleResponseError)
 
       expect(statusCode).to.be.equal(204)
-
     })
 
     it('Should throw not deleted employee', async function () {
-
       const {
         statusCode,
         body: { error }
@@ -191,9 +162,6 @@ describe('Employees', function () {
 
       expect(statusCode).to.be.equal(409)
       expect(error).to.match(/Employee could be deleted/)
-
     })
-
   })
-
 })
