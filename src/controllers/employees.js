@@ -6,7 +6,7 @@ const {
 exports.listEmployees = async ({ knex, logger }, res) => {
   try {
 
-    const [employees] = await knex('employees')
+    const employees = await knex('employees')
       .select(EMPLOYEE_FIELDS)
 
     return makeResponse(
@@ -16,7 +16,11 @@ exports.listEmployees = async ({ knex, logger }, res) => {
     )
 
   } catch (err) {
+
+    /* istanbul ignore next */
     logger.error(`Problem in listEmployees: ${err}`)
+
+    /* istanbul ignore next */
     return makeResponse(
       res,
       500,
@@ -42,8 +46,10 @@ exports.getEmployee = async ({ knex, logger, params }, res) => {
 
   } catch (err) {
 
+    /* istanbul ignore next */
     logger.error(`Problem in getEmployee: ${err}`)
 
+    /* istanbul ignore next */
     return makeResponse(
       res,
       500,
@@ -71,12 +77,12 @@ exports.createEmployee = async ({ knex, logger, body }, res) => {
     logger.error(`Problem in createEmployee: ${err}`)
 
     const error = err.code === '23505'
-      ? { error: 'There is already a user with this name' }
+      ? { error: 'There is already a employee with this email' }
       : { error: 'An internal error occurred' }
 
     return makeResponse(
       res,
-      500,
+      err.code === '23505' ? 409 : 500,
       error
     )
 
@@ -101,15 +107,18 @@ exports.updateEmployee = async ({ knex, logger, params, body }, res) => {
 
   } catch (err) {
 
+    /* istanbul ignore next */
     logger.error(`Problem in updateEmployee: ${err}`)
 
+    /* istanbul ignore next */
     const error = err.code === '23505'
-      ? { error: 'There is already a user with this name' }
+      ? { error: 'There is already a employee with this email' }
       : { error: 'An internal error occurred' }
 
+    /* istanbul ignore next */
     return makeResponse(
       res,
-      500,
+      err.code === '23505' ? 409 : 500,
       error
     )
 
