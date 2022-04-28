@@ -1,6 +1,8 @@
-const { sign } = require('jsonwebtoken')
-const { makeResponse } = require('../../utils')
-const config = require('../../config')
+const {
+  signJWT,
+  makeResponse
+} = require('../utils')
+const config = require('../config')
 
 const authMe = async ({ body, logger }, res) => {
   try {
@@ -10,30 +12,30 @@ const authMe = async ({ body, logger }, res) => {
       return makeResponse(
         res,
         409,
-        { 'message': 'Email credential is missing from login info' }
+        { 'error': 'Email credential is missing from login info' }
       )
 
     }
 
-    const token = sign(
+    const token = signJWT(
       { email: body.email },
+      'employees-api',
       config.JWT_SECRET,
-      {
-        issuer: 'employees-api',
-        expiresIn: config.JWT_EXP
-      }
+      config.JWT_EXP
     )
 
     return makeResponse(
       res,
-      201,
+      200,
       { token }
     )
 
   } catch (err) {
 
+    /* istanbul ignore next */
     logger.error(`Exception in authMe: ${err}`)
 
+    /* istanbul ignore next */
     return makeResponse(
       res,
       500,

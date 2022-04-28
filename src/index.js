@@ -45,7 +45,7 @@ httpServer.listen(
   },
   () => {
 
-    logger.info(`Server ready at http://${config.API_PORT}:${config.API_HOST}`)
+    logger.info(`Server ready at http://${config.API_HOST}:${config.API_PORT}`)
   }
 )
 
