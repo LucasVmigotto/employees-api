@@ -101,4 +101,33 @@ describe('Employees', function () {
 
   })
 
+  describe('DELETE /employees/<employeeId>', function () {
+
+    it('Should successfully delete a employee', async function () {
+
+      const { statusCode } = await request(httpServer)
+        .delete(`/employees/${localEmployeeId}`)
+        .set({ Authorization: `Bearer ${token}` })
+        .then(handleResponseError)
+
+      expect(statusCode).to.be.equal(204)
+
+    })
+
+    it('Should throw not deleted employee', async function () {
+
+      const {
+        statusCode,
+        body: { error }
+      } = await request(httpServer)
+        .delete(`/employees/${localEmployeeId}`)
+        .set({ Authorization: `Bearer ${token}` })
+
+      expect(statusCode).to.be.equal(409)
+      expect(error).to.match(/Employee could be deleted/)
+
+    })
+
+  })
+
 })
