@@ -28,7 +28,17 @@ exports.listEmployees = async ({ knex, logger }, res) => {
 exports.getEmployee = async ({ knex, logger, params }, res) => {
   try {
 
-    return
+    const { employeeId: id } = params
+
+    const [employee] = await knex('employees')
+      .select(EMPLOYEE_FIELDS)
+      .where({ id })
+
+    return makeResponse(
+      res,
+      200,
+      { employee }
+    )
 
   } catch (err) {
     logger.error(`Problem in getEmployee: ${err}`)

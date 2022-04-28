@@ -10,7 +10,7 @@ module.exports = app => {
 
   app.post('/employees', protectedByAuth, employees.createEmployee)
   app.get('/employees', protectedByAuth, employees.listEmployees)
-  app.get('/employees/:employId', protectedByAuth, employees.getEmployee)
+  app.get('/employees/:employeeId', protectedByAuth, employees.getEmployee)
   app.put('/employees/:employeeId', protectedByAuth, employees.updateEmployee)
   app.delete('/employees/:employeeId', protectedByAuth, employees.deleteEmployee)
 
