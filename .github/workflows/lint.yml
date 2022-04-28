@@ -1,0 +1,33 @@
+name: employee-api Lint
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint Code
+    if: "!contains(github.event.head_commit.message, 'skip-ci')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.15.0'
+      - name: Docker Image
+        uses: LucasVmigotto/employees-api/docker@main
+      - name: Install dependencies
+        run: yarn
+      - name: Cache modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Lint
+        run: yarn lint

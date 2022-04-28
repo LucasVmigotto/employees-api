@@ -1,5 +1,7 @@
 # employees-api
 
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
 ## Summary
 
 * [Project Stack](#project-stack)
@@ -96,6 +98,15 @@ You can start the services and use it as need such as the following examples:
     ```
 
 ## API Handbook
+
+Use the [Postman](https://www.postman.com/product/what-is-postman/) collection in `docs/collections` folder to test the API's endpoints
+
+* In order to use the API, you need to start up the services first
+* Note that for some tests (e.g. edit a post with other user token that not the owner) you have to create more than one user.
+* After the user creation, use the `/auth` endpoint to generate a token for each user that you will use in requests contexts, than set the token as Postman Collection Variable
+
+### Authorization
+
 
 ### Authorization
 
