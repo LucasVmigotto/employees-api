@@ -15,7 +15,7 @@ exports.listEmployees = async ({ knex, logger }, res) => {
     )
   } catch (err) {
     /* istanbul ignore next */
-    logger.error(`Problem in listEmployees: ${err}`)
+    logger.error(`Exception in listEmployees: ${err}`)
 
     /* istanbul ignore next */
     return makeResponse(
@@ -41,7 +41,7 @@ exports.getEmployee = async ({ knex, logger, params }, res) => {
     )
   } catch (err) {
     /* istanbul ignore next */
-    logger.error(`Problem in getEmployee: ${err}`)
+    logger.error(`Exception in getEmployee: ${err}`)
 
     /* istanbul ignore next */
     return makeResponse(
@@ -64,7 +64,7 @@ exports.createEmployee = async ({ knex, logger, body }, res) => {
       { employeeId: employee.id }
     )
   } catch (err) {
-    logger.error(`Problem in createEmployee: ${err}`)
+    logger.error(`Exception in createEmployee: ${err}`)
 
     const error = err.code === '23505'
       ? { error: 'There is already a employee with this email' }
@@ -94,7 +94,7 @@ exports.updateEmployee = async ({ knex, logger, params, body }, res) => {
     )
   } catch (err) {
     /* istanbul ignore next */
-    logger.error(`Problem in updateEmployee: ${err}`)
+    logger.error(`Exception in updateEmployee: ${err}`)
 
     /* istanbul ignore next */
     const error = err.code === '23505'
@@ -126,7 +126,7 @@ exports.deleteEmployee = async ({ knex, logger, params }, res) => {
         : { error: 'Employee could be deleted' }
     )
   } catch (err) {
-    logger.error(`Problem in deleteEmployee: ${err}`)
+    logger.error(`Exception in deleteEmployee: ${err}`)
 
     return makeResponse(
       res,
