@@ -1,7 +1,5 @@
-CREATE SCHEMA employees_api;
-
-DROP TABLE IF EXISTS employees_api.employees;
-CREATE TABLE IF NOT EXISTS employees_api.employees (
+DROP TABLE IF EXISTS employees;
+CREATE TABLE IF NOT EXISTS employees (
     id SERIAL,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(191) NOT NULL,

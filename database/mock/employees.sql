@@ -1,4 +1,4 @@
-INSERT INTO employees_api.employees
+INSERT INTO employees
     (name, email, department, salary, birth_date)
 VALUES
     ('Anakin Skywalker', 'thechoosenone@force.com', 'Padawan', 4000.00, '1981-04-19'),
