@@ -12,8 +12,26 @@ const createApp = require('../../src/app')
 describe('Employees', function () {
 
   const token = generateToken()
+
   let localEmployeeId = null
   let localEmployee = null
+
+  const employToCreate = {
+    name: 'John Doe',
+    email: 'john.doe@email.com',
+    department: 'Support',
+    salary: 2000.00,
+    birth_date: '2000-07-02'
+  }
+
+  const employToUpdate = {
+    name: 'John Doe Changed',
+    email: 'john.doe.changed@email.com',
+    department: 'Support',
+    salary: 4000.00,
+    birth_date: '2000-02-07'
+  }
+
   let knex, httpServer
 
   before(function () {
@@ -56,14 +74,6 @@ describe('Employees', function () {
 
   describe('POST /employees', function () {
 
-    const employToCreate = {
-      name: 'John Doe',
-      email: 'john.doe@email.com',
-      department: 'Support',
-      salary: 2000.00,
-      birth_date: '2000-07-02'
-    }
-
     it('Should successfully create an employee', async function () {
 
       const {
@@ -96,6 +106,33 @@ describe('Employees', function () {
       expect(statusCode).to.be.equal(409)
       expect(error).to.be.not.null
       expect(error).to.match(/There is already a employee with this email/)
+
+    })
+
+  })
+
+  describe('GET /employees/<employeeId>', function () {
+
+    it('Should return an employee by id', async function () {
+
+      const {
+        statusCode,
+        body: { employee }
+      } = await request(httpServer)
+        .get(`/employees/${localEmployeeId}`)
+        .set({ Authorization: `Bearer ${token}` })
+        .then(handleResponseError)
+
+      expect(statusCode).to.be.equal(200)
+      expect(employee).to.be.not.null
+      expect(employee).to.have.property('id')
+      expect(employee).to.have.property('name')
+      expect(employee).to.have.property('email')
+      expect(employee).to.have.property('department')
+      expect(employee).to.have.property('salary')
+      expect(employee).to.have.property('birth_date')
+
+      localEmployee = { ...employee }
 
     })
 
