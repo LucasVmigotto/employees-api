@@ -65,11 +65,15 @@ const protectedByAuth = (req, res, next) => {
     return makeResponse(
       res,
       409,
-      { message: 'No token was submitted' }
+      { error: 'No token was submitted' }
     )
 
   }
 
 }
 
-module.exports = { protectedByAuth }
+module.exports = {
+  verifyToken,
+  parseAuthorization,
+  protectedByAuth
+}

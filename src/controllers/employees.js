@@ -16,7 +16,11 @@ exports.listEmployees = async ({ knex, logger }, res) => {
     )
 
   } catch (err) {
+
+    /* istanbul ignore next */
     logger.error(`Problem in listEmployees: ${err}`)
+
+    /* istanbul ignore next */
     return makeResponse(
       res,
       500,
@@ -42,8 +46,10 @@ exports.getEmployee = async ({ knex, logger, params }, res) => {
 
   } catch (err) {
 
+    /* istanbul ignore next */
     logger.error(`Problem in getEmployee: ${err}`)
 
+    /* istanbul ignore next */
     return makeResponse(
       res,
       500,
@@ -101,12 +107,15 @@ exports.updateEmployee = async ({ knex, logger, params, body }, res) => {
 
   } catch (err) {
 
+    /* istanbul ignore next */
     logger.error(`Problem in updateEmployee: ${err}`)
 
+    /* istanbul ignore next */
     const error = err.code === '23505'
       ? { error: 'There is already a employee with this email' }
       : { error: 'An internal error occurred' }
 
+    /* istanbul ignore next */
     return makeResponse(
       res,
       err.code === '23505' ? 409 : 500,
