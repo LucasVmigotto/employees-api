@@ -119,14 +119,29 @@ exports.updateEmployee = async ({ knex, logger, params, body }, res) => {
 exports.deleteEmployee = async ({ knex, logger, params }, res) => {
   try {
 
-    return
+    const { employeeId: id } = params
+
+    const deleted = await knex('employees')
+      .where({ id })
+      .del()
+
+    return makeResponse(
+      res,
+      !!deleted ? 204 : 409,
+      !!deleted ?
+        null :
+        { error: 'Employee could be deleted' }
+    )
 
   } catch (err) {
+
     logger.error(`Problem in deleteEmployee: ${err}`)
+
     return makeResponse(
       res,
       500,
       { error: 'An internal error occurred' }
     )
+
   }
 }
