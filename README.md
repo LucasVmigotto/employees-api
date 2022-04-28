@@ -1,6 +1,9 @@
 # employees-api
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![employee-api Lint](https://github.com/LucasVmigotto/employees-api/actions/workflows/lint.yml/badge.svg)](https://github.com/LucasVmigotto/employees-api/actions/workflows/lint.yml)
+[![employee-api Code Coverage](https://github.com/LucasVmigotto/employees-api/actions/workflows/test-coverage.yml/badge.svg)](https://github.com/LucasVmigotto/employees-api/actions/workflows/test-coverage.yml)
+[![codecov](https://codecov.io/gh/LucasVmigotto/employees-api/branch/dev/graph/badge.svg?token=KULRPCA1HD)](https://codecov.io/gh/LucasVmigotto/employees-api)
 
 ## Summary
 
