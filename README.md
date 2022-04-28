@@ -109,7 +109,7 @@ You can start the services and use it as need such as the following examples:
   }
   ```
 
-### Employe
+### Employees
 
 * **GET** `/employees` - (Protected)
 
