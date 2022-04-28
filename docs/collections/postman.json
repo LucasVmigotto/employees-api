@@ -119,14 +119,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{HTTP_PROTOCOL}}://{{API_HOST}}:{{API_PORT}}/auth",
+							"raw": "{{HTTP_PROTOCOL}}://{{API_HOST}}:{{API_PORT}}/employees",
 							"protocol": "{{HTTP_PROTOCOL}}",
 							"host": [
 								"{{API_HOST}}"
 							],
 							"port": "{{API_PORT}}",
 							"path": [
-								"auth"
+								"employees"
 							]
 						}
 					},
@@ -260,7 +260,7 @@
 					"response": []
 				},
 				{
-					"name": "/employees/<employeeId>",
+					"name": "/reports/employees/salary",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},

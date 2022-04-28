@@ -125,8 +125,11 @@ You can start the services and use it as need such as the following examples:
 
   ```json
   {
-      "name": "John Doe",
-      "email": "example@mail.com"
+    "name": "John Doe",
+    "email": "john.doe@email.com",
+    "department": "Support",
+    "salary": 2000.00,
+    "birth_date": "2000-07-02"
   }
   ```
 
@@ -136,8 +139,11 @@ You can start the services and use it as need such as the following examples:
 
   ```json
   {
-      "name": "John Doe Changed",
-      "email": "example.changed@mail.com"
+    "name": "John Doe Changed",
+    "email": "john.doe.changed@email.com",
+    "department": "Support",
+    "salary": 2000.00,
+    "birth_date": "2000-07-02"
   }
   ```
 
