@@ -5,7 +5,6 @@ const {
 
 exports.reportByAge = async ({ knex, logger }, res) => {
   try {
-
     const [[younger], [older], [average]] = await Promise.all([
       knex('employees')
         .select(EMPLOYEE_FIELDS)
@@ -28,7 +27,6 @@ exports.reportByAge = async ({ knex, logger }, res) => {
         average
       }
     )
-
   } catch (err) {
     /* istanbul ignore next */
     logger.error(`Exception in reportByAge: ${knex}`)
@@ -44,7 +42,6 @@ exports.reportByAge = async ({ knex, logger }, res) => {
 
 exports.reportBySalary = async ({ knex, logger }, res) => {
   try {
-
     const [[lowest], [highest], [average]] = await Promise.all([
       knex('employees')
         .select(EMPLOYEE_FIELDS)
@@ -67,7 +64,6 @@ exports.reportBySalary = async ({ knex, logger }, res) => {
         average
       }
     )
-
   } catch (err) {
     /* istanbul ignore next */
     logger.error(`Exception in reportBySalary: ${knex}`)

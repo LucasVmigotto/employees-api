@@ -61,5 +61,4 @@ describe('Employees', function () {
       expect(average).to.be.not.null
     })
   })
-
 })
