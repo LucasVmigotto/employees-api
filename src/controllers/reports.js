@@ -6,18 +6,18 @@ const {
 exports.reportByAge = async ({ knex, logger }, res) => {
   try {
 
-    const [younger] = await knex('employees')
-      .select(EMPLOYEE_FIELDS)
-      .orderBy('birth_date', 'desc')
-      .limit(1)
-
-    const [older] = await knex('employees')
-      .select(EMPLOYEE_FIELDS)
-      .orderBy('birth_date')
-      .limit(1)
-
-    const [average] = await knex('employees')
-      .avg(knex.raw('EXTRACT(YEARS FROM AGE(??))', 'birth_date'))
+    const [[younger], [older], [average]] = await Promise.all([
+      knex('employees')
+        .select(EMPLOYEE_FIELDS)
+        .orderBy('birth_date', 'desc')
+        .limit(1),
+      knex('employees')
+        .select(EMPLOYEE_FIELDS)
+        .orderBy('birth_date')
+        .limit(1),
+      knex('employees')
+        .avg(knex.raw('EXTRACT(YEARS FROM AGE(??))', 'birth_date'))
+    ])
 
     return makeResponse(
       res,
@@ -45,18 +45,18 @@ exports.reportByAge = async ({ knex, logger }, res) => {
 exports.reportBySalary = async ({ knex, logger }, res) => {
   try {
 
-    const [lowest] = await knex('employees')
-      .select(EMPLOYEE_FIELDS)
-      .orderBy('salary')
-      .limit(1)
-
-    const [highest] = await knex('employees')
-      .select(EMPLOYEE_FIELDS)
-      .orderBy('salary', 'desc')
-      .limit(1)
-
-    const [average] = await knex('employees')
-      .avg('salary')
+    const [[lowest], [highest], [average]] = await Promise.all([
+      knex('employees')
+        .select(EMPLOYEE_FIELDS)
+        .orderBy('salary')
+        .limit(1),
+      knex('employees')
+        .select(EMPLOYEE_FIELDS)
+        .orderBy('salary', 'desc')
+        .limit(1),
+      knex('employees')
+        .avg('salary')
+    ])
 
     return makeResponse(
       res,
