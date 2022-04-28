@@ -1,12 +1,8 @@
-const { JWT_SECRET } = require('../../src/config')
 const {
   expect,
   generateToken
 } = require('../utils')
-const {
-  verifyToken,
-  parseAuthorization
-} = require('../../src/security')
+const { parseAuthorization } = require('../../src/security')
 
 /* eslint-env mocha */
 /* eslint-disable no-unused-expressions */
