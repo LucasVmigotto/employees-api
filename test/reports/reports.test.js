@@ -45,4 +45,21 @@ describe('Employees', function () {
     })
   })
 
+  describe('GET /reports/employees/salary', function () {
+    it('Should return the lowest, highest and average salary', async function () {
+      const {
+        statusCode,
+        body: { lowest, highest, average }
+      } = await request(httpServer)
+        .get('/reports/employees/salary')
+        .set({ Authorization: `Bearer ${token}` })
+        .then(handleResponseError)
+
+      expect(statusCode).to.be.equal(200)
+      expect(lowest).to.be.not.null
+      expect(highest).to.be.not.null
+      expect(average).to.be.not.null
+    })
+  })
+
 })
