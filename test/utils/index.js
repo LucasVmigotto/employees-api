@@ -16,7 +16,9 @@ const generateToken = () => signJWT(
 
 const handleResponseError = res => {
   if (res.body.error) {
+
     return Promise.reject(res.body.error)
+
   }
   return res
 }

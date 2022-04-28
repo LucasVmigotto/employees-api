@@ -71,12 +71,12 @@ exports.createEmployee = async ({ knex, logger, body }, res) => {
     logger.error(`Problem in createEmployee: ${err}`)
 
     const error = err.code === '23505'
-      ? { error: 'There is already a user with this email' }
+      ? { error: 'There is already a employee with this email' }
       : { error: 'An internal error occurred' }
 
     return makeResponse(
       res,
-      500,
+      err.code === '23505' ? 409 : 500,
       error
     )
 
@@ -104,12 +104,12 @@ exports.updateEmployee = async ({ knex, logger, params, body }, res) => {
     logger.error(`Problem in updateEmployee: ${err}`)
 
     const error = err.code === '23505'
-      ? { error: 'There is already a user with this name' }
+      ? { error: 'There is already a employee with this email' }
       : { error: 'An internal error occurred' }
 
     return makeResponse(
       res,
-      500,
+      err.code === '23505' ? 409 : 500,
       error
     )
 
