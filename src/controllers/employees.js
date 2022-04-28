@@ -41,27 +41,45 @@ exports.getEmployee = async ({ knex, logger, params }, res) => {
     )
 
   } catch (err) {
+
     logger.error(`Problem in getEmployee: ${err}`)
+
     return makeResponse(
       res,
       500,
       { error: 'An internal error occurred' }
     )
+
   }
 }
 
 exports.createEmployee = async ({ knex, logger, body }, res) => {
   try {
 
-    return
+    const [employee] = await knex('employees')
+      .insert(body)
+      .returning('id')
+
+    return makeResponse(
+      res,
+      200,
+      { employeeId: employee.id }
+    )
 
   } catch (err) {
+
     logger.error(`Problem in createEmployee: ${err}`)
+
+    const error = err.code === '23505'
+      ? { error: 'There is already a user with this name' }
+      : { error: 'An internal error occurred' }
+
     return makeResponse(
       res,
       500,
-      { error: 'An internal error occurred' }
+      error
     )
+
   }
 }
 
