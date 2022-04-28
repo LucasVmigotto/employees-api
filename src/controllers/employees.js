@@ -86,15 +86,33 @@ exports.createEmployee = async ({ knex, logger, body }, res) => {
 exports.updateEmployee = async ({ knex, logger, params, body }, res) => {
   try {
 
-    return
+    const { employeeId: id } = params
+
+    const [employee] = await knex('employees')
+      .update(body)
+      .where({ id })
+      .returning('id')
+
+    return makeResponse(
+      res,
+      200,
+      { employeeId: employee.id }
+    )
 
   } catch (err) {
+
     logger.error(`Problem in updateEmployee: ${err}`)
+
+    const error = err.code === '23505'
+      ? { error: 'There is already a user with this name' }
+      : { error: 'An internal error occurred' }
+
     return makeResponse(
       res,
       500,
-      { error: 'An internal error occurred' }
+      error
     )
+
   }
 }
 
