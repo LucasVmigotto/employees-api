@@ -1,0 +1,371 @@
+{
+	"info": {
+		"_postman_id": "a0f3d7d0-c0f1-4e3a-8b04-ab9c3cf17f84",
+		"name": "Employees API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "/auth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"example@mail.com\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HTTP_PROTOCOL}}://{{API_HOST}}:{{API_PORT}}/auth",
+							"protocol": "{{HTTP_PROTOCOL}}",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"port": "{{API_PORT}}",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "/employees",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"example@mail.com\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HTTP_PROTOCOL}}://{{API_HOST}}:{{API_PORT}}/employees",
+							"protocol": "{{HTTP_PROTOCOL}}",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"port": "{{API_PORT}}",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employees/<employeeId>",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"example@mail.com\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HTTP_PROTOCOL}}://{{API_HOST}}:{{API_PORT}}/employees/<employeeId>",
+							"protocol": "{{HTTP_PROTOCOL}}",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"port": "{{API_PORT}}",
+							"path": [
+								"employees",
+								"<employeeId>"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employees",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@email.com\",\n    \"department\": \"Support\",\n    \"salary\": 2000.00,\n    \"birth_date\": \"2000-07-02\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HTTP_PROTOCOL}}://{{API_HOST}}:{{API_PORT}}/auth",
+							"protocol": "{{HTTP_PROTOCOL}}",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"port": "{{API_PORT}}",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employees/<employeeId>",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"name\": \"John Doe Changed\",\n    \"email\": \"john.doe.changed@email.com\",\n    \"department\": \"Sales\",\n    \"salary\": 5000.00,\n    \"birth_date\": \"2001-02-07\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HTTP_PROTOCOL}}://{{API_HOST}}:{{API_PORT}}/employees/<employeeId>",
+							"protocol": "{{HTTP_PROTOCOL}}",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"port": "{{API_PORT}}",
+							"path": [
+								"employees",
+								"<employeeId>"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employees/<employeeId>",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"example@mail.com\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HTTP_PROTOCOL}}://{{API_HOST}}:{{API_PORT}}/employees/<employeeId>",
+							"protocol": "{{HTTP_PROTOCOL}}",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"port": "{{API_PORT}}",
+							"path": [
+								"employees",
+								"<employeeId>"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "# Employees\n\n* **GET** `/employees` - (Protected)\n\n  List all employees registered into the database\n\n* **GET** `/employees/<employeeId>` - (Protected)\n\n  List more info about the employee related to given `id`\n\n* **POST** `/employees` - (Protected)\n\n  Create, with the given values in JSON payload, the employee into the database\n\n  ```json\n  {\n      \"name\": \"John Doe\",\n      \"email\": \"example@mail.com\"\n  }\n  ```\n\n* **PUT** `/employees/<employeeId>` - (Protected)\n\n  Update the the given values in JSON payload related to the employee `id` informed\n\n  ```json\n  {\n      \"name\": \"John Doe Changed\",\n      \"email\": \"example.changed@mail.com\"\n  }\n  ```\n\n* **DELETE** `/employees/<employeeId>` - (Protected)\n\n  Delete the employee with the `id` informed",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{API_TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "/reports/employees/age",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"example@mail.com\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HTTP_PROTOCOL}}://{{API_HOST}}:{{API_PORT}}/reports/employees/age",
+							"protocol": "{{HTTP_PROTOCOL}}",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"port": "{{API_PORT}}",
+							"path": [
+								"reports",
+								"employees",
+								"age"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employees/<employeeId>",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\": \"example@mail.com\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HTTP_PROTOCOL}}://{{API_HOST}}:{{API_PORT}}/reports/employees/salary",
+							"protocol": "{{HTTP_PROTOCOL}}",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"port": "{{API_PORT}}",
+							"path": [
+								"reports",
+								"employees",
+								"salary"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "# Reports\n\n* **GET** `/reports/employees/salary` - (Protected)\n\n  Get the highest and lowest salary between employees\n\n* **GET** `/reports/employees/age` - (Protected)\n\n  Get the highest and lowest age between employees",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{API_TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HTTP_PROTOCOL",
+			"value": "http",
+			"type": "default"
+		},
+		{
+			"key": "API_HOST",
+			"value": "localhost",
+			"type": "default"
+		},
+		{
+			"key": "API_PORT",
+			"value": "3000",
+			"type": "default"
+		},
+		{
+			"key": "API_TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV4YW1wbGVAbWFpbC5jb20iLCJpYXQiOjE2NTExNTYwNDQsImV4cCI6MTY1MTc2MDg0NCwiaXNzIjoiZW1wbG95ZWVzLWFwaSJ9.PGwSo3bXT4hmFjFnhvOvKGFiLTuJPHXGDbnTFGwcSlk",
+			"type": "default"
+		}
+	]
+}

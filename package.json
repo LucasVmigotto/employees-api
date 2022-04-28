@@ -1,0 +1,47 @@
+{
+    "name": "employees-api",
+    "version": "0.0.0",
+    "description": "Simple REST API employee based",
+    "main": "src/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:LucasVmigotto/employees-api.git"
+    },
+    "author": {
+        "name": "Lucas Vidor Migotto",
+        "email": "lvmigotto1@gmail.com"
+    },
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "start": "node -r dotenv/config src/index.js",
+        "start:dev": "nodemon --inspect=0.0.0.0:9229 -r dotenv/config src/index.js",
+        "migrate:make": "knex migrate:make",
+        "migrate:latest": "knex migrate:latest",
+        "migrate:rollback": "knex migrate:rollback --all",
+        "test": "NODE_ENV=test mocha 'test/**/*.test.js'",
+        "test:coverage": "rm -rf ./node_modules/.cache && rm -rf .nyc_output && rm -rf coverage/ && NODE_ENV=test nyc --reporter=text-summary --reporter=lcov mocha 'test/**/*.test.js'",
+        "test:watch": "NODE_ENV=test mocha --watch",
+        "lint": "standard"
+    },
+    "dependencies": {
+        "body-parser": "^1.20.0",
+        "cors": "^2.8.5",
+        "debug": "^4.3.4",
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "jsonwebtoken": "^8.5.1",
+        "knex": "^1.0.7",
+        "pg": "^8.7.3",
+        "winston": "^3.7.2"
+    },
+    "devDependencies": {
+        "chai": "^4.3.6",
+        "chai-as-promised": "^7.1.1",
+        "chai-http": "^4.3.0",
+        "mocha": "^9.2.2",
+        "nodemon": "^2.0.15",
+        "nyc": "^15.1.0",
+        "standard": "^16.0.4"
+    }
+}
