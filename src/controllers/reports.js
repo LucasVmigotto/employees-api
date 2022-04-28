@@ -1,0 +1,4 @@
+exports.reportByAge = () => {}
+
+exports.reportBySalary = () => {}
+
