@@ -1,6 +1,6 @@
 {
     "name": "employees-api",
-    "version": "0.0.0",
+    "version": "1.1.1",
     "description": "Simple REST API employee based",
     "main": "src/index.js",
     "repository": {

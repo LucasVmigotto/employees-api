@@ -1,8 +1,8 @@
 # employees-api
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![employee-api Lint](https://github.com/LucasVmigotto/employees-api/actions/workflows/lint.yml/badge.svg)](https://github.com/LucasVmigotto/employees-api/actions/workflows/lint.yml)
-[![employee-api Code Coverage](https://github.com/LucasVmigotto/employees-api/actions/workflows/test-coverage.yml/badge.svg)](https://github.com/LucasVmigotto/employees-api/actions/workflows/test-coverage.yml)
+[![Lint Code](https://github.com/LucasVmigotto/employees-api/actions/workflows/lint.yml/badge.svg)](https://github.com/LucasVmigotto/employees-api/actions/workflows/lint.yml)
+[![Code Coverage](https://github.com/LucasVmigotto/employees-api/actions/workflows/code-coverage.yml/badge.svg)](https://github.com/LucasVmigotto/employees-api/actions/workflows/code-coverage.yml)
 [![codecov](https://codecov.io/gh/LucasVmigotto/employees-api/branch/dev/graph/badge.svg?token=KULRPCA1HD)](https://codecov.io/gh/LucasVmigotto/employees-api)
 
 ## Summary
@@ -88,13 +88,13 @@ The project was built in a [Docker](https://docs.docker.com/engine) environment 
 
 You can start the services and use it as need such as the following examples:
 
-* Social Me CLI
+* Bash CLI
 
     ```bash
     docker-compose run --rm --service-ports employees-api bash
     ```
 
-* Social Me API
+* Start API
 
     ```bash
     docker-compose up employees-api bash
@@ -113,9 +113,6 @@ Use the [Postman](https://www.postman.com/product/what-is-postman/) collection i
 * In order to use the API, you need to start up the services first
 * Note that for some tests (e.g. edit a post with other user token that not the owner) you have to create more than one user.
 * After the user creation, use the `/auth` endpoint to generate a token for each user that you will use in requests contexts, than set the token as Postman Collection Variable
-
-### Authorization
-
 
 ### Authorization
 
