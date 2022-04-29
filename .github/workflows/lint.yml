@@ -1,13 +1,9 @@
-name: employee-api Lint
+name: Lint Code
 
-on:
-  push:
-    branches:
-      - main
-      - dev
+on: [push]
 
 jobs:
-  lint:
+  lint-code:
     runs-on: ubuntu-latest
     name: Lint Code
     if: "!contains(github.event.head_commit.message, 'skip-ci')"
@@ -29,5 +25,5 @@ jobs:
         with:
           path: ~/.yarn
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
-      - name: Lint
+      - name: Lint code
         run: yarn lint

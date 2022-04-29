@@ -1,0 +1,49 @@
+name: Test Code
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  test-code:
+    runs-on: ubuntu-latest
+    name: Test Code
+    if: "!contains(github.event.head_commit.message, 'skip-ci')"
+    services:
+      postgres:
+        image: postgres:14
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.15.0'
+      - name: Docker Image
+        uses: LucasVmigotto/employees-api/docker@main
+      - name: Setup Postgres
+        run: sudo apt-get -yqq install libpq-dev
+      - name: Install dependencies
+        run: yarn
+      - name: Cache modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Migrate to latest database version
+        env:
+          PG_CONNECTION_STRING: ${{ secrets.PG_CONNECTION_STRING }}
+        run: yarn migrate:latest
+      - name: Test Code Coverage
+        env:
+          PG_CONNECTION_STRING: ${{ secrets.PG_CONNECTION_STRING }}
+        run: yarn test
